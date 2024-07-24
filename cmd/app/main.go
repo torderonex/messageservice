@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/torderonex/messageservice/internal/config"
+	l "github.com/torderonex/messageservice/internal/logger"
 	"log"
 )
 
@@ -16,9 +17,9 @@ func init() {
 func main() {
 	//init cfg
 	cfg := config.MustLoad()
-	fmt.Println(cfg)
 	//init logger
-
+	logger := l.MustCreate(cfg.Env)
+	logger.Info(fmt.Sprintf("The server starts on port %s", cfg.HTTPServer.Port))
 	//init repo
 
 	//init kafka

@@ -8,7 +8,13 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	EnvLocal = "local"
+	EnvProd  = "production"
+)
+
 type Config struct {
+	Env        string
 	Postgres   PostgresDatabase `yaml:"postgres"`
 	HTTPServer HTTPServer       `mapstructure:"http_server"`
 	//Kafka
@@ -48,6 +54,6 @@ func MustLoad() Config {
 	}
 
 	config.Postgres.Password = os.Getenv("POSTGRES_PASS")
-
+	config.Env = os.Getenv("Env")
 	return config
 }
