@@ -8,6 +8,7 @@ import (
 	l "github.com/torderonex/messageservice/internal/logger"
 	"github.com/torderonex/messageservice/internal/repo"
 	"log"
+	"log/slog"
 	"strconv"
 )
 
@@ -22,7 +23,8 @@ func main() {
 	cfg := config.MustLoad()
 	//init logger
 	logger := l.MustCreate(cfg.Env)
-	logger.Info(fmt.Sprintf("The server starts on port %s", cfg.HTTPServer.Port))
+	slog.SetDefault(logger)
+	slog.Info(fmt.Sprintf("The server starts on port %s", cfg.HTTPServer.Port))
 	//init repo
 	store := repo.New(cfg)
 	id, _ := store.Messages.SaveMessage(context.TODO(), "Hello, world!")
