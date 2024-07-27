@@ -5,6 +5,6 @@ postgres:
   port: 5432
   username: "postgres"
   database: "messaggio"
-  host: "postgres_db"
+  host: "localhost"
   max_retries: 5
   retry_interval: 4s
