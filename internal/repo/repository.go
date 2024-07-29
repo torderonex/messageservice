@@ -6,7 +6,7 @@ import (
 	"github.com/torderonex/messageservice/internal/repo/postgres"
 )
 
-func New(config config.Config) *Repository {
+func New(config *config.Config) *Repository {
 	pg := postgres.New(config.Postgres)
 	return &Repository{
 		Messages: postgres.NewMessageRepo(pg),

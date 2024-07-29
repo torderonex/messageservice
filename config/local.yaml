@@ -8,3 +8,6 @@ postgres:
   host: "db"
   max_retries: 5
   retry_interval: 4s
+kafka:
+  host: "kafka:9092"
+  topic: "messages"

@@ -17,7 +17,12 @@ type Config struct {
 	Env        string
 	Postgres   PostgresDatabase `yaml:"postgres"`
 	HTTPServer HTTPServer       `mapstructure:"http_server"`
-	//Kafka
+	Kafka      Kafka            `mapstructure:"kafka"`
+}
+
+type Kafka struct {
+	Host  string
+	Topic string
 }
 
 type HTTPServer struct {
@@ -35,7 +40,7 @@ type PostgresDatabase struct {
 	Password      string        `yaml:"password"`
 }
 
-func MustLoad() Config {
+func MustLoad() *Config {
 
 	configPath := os.Getenv("CONFIG_PATH")
 	if configPath == "" {
@@ -55,5 +60,6 @@ func MustLoad() Config {
 
 	config.Postgres.Password = os.Getenv("POSTGRES_PASS")
 	config.Env = os.Getenv("ENV")
-	return config
+
+	return &config
 }
