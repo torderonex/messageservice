@@ -54,6 +54,6 @@ func MustLoad() Config {
 	}
 
 	config.Postgres.Password = os.Getenv("POSTGRES_PASS")
-	config.Env = os.Getenv("Env")
+	config.Env = os.Getenv("ENV")
 	return config
 }
