@@ -23,7 +23,7 @@ type sendMessageRes struct {
 // @Success 200 {object} sendMessageRes
 // @Failure 400 {object} errorResponse "Invalid request payload"
 // @Failure 500 {object} errorResponse "Internal server error"
-// @Router /messages [post]
+// @Router /api/v1/messages/send [post]
 func (h *Handler) sendMessage(c *gin.Context) {
 	var req sendMessageReq
 	if err := c.BindJSON(&req); err != nil {
@@ -45,7 +45,7 @@ func (h *Handler) sendMessage(c *gin.Context) {
 // @Tags messages
 // @Success 200 "Successfully processed messages"
 // @Failure 500 {object} errorResponse "Internal server error"
-// @Router /messages/process [post]
+// @Router /api/v1/messages/process [put]
 func (h *Handler) processMessages(c *gin.Context) {
 	err := h.service.Message.ProcessMessages(c)
 	if err != nil {
