@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	"github.com/torderonex/messageservice/internal/entity"
 )
 
 const (
@@ -28,4 +29,17 @@ func (m *MessageRepo) SaveMessage(ctx context.Context, content string) (int, err
 		return 0, err
 	}
 	return id, nil
+}
+
+func (m *MessageRepo) ProcessMessage(ctx context.Context, id int) error {
+	query := fmt.Sprintf("UPDATE %s SET is_processed = 't' WHERE id = $1", messagesTable)
+	_, err := m.db.ExecContext(ctx, query, id)
+	return err
+}
+
+func (m *MessageRepo) GetProcessedMessagesStats(ctx context.Context) ([]entity.Message, error) {
+	var res []entity.Message
+	query := fmt.Sprintf("SELECT * FROM %s WHERE is_processed = 't'", messagesTable)
+	err := m.db.SelectContext(ctx, &res, query)
+	return res, err
 }

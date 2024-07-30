@@ -3,6 +3,7 @@ package repo
 import (
 	"context"
 	"github.com/torderonex/messageservice/internal/config"
+	"github.com/torderonex/messageservice/internal/entity"
 	"github.com/torderonex/messageservice/internal/repo/postgres"
 )
 
@@ -18,5 +19,7 @@ type Repository struct {
 }
 
 type Messages interface {
-	SaveMessage(c context.Context, content string) (int, error)
+	SaveMessage(ctx context.Context, content string) (int, error)
+	GetProcessedMessagesStats(ctx context.Context) ([]entity.Message, error)
+	ProcessMessage(ctx context.Context, id int) error
 }
