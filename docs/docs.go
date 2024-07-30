@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/messages/process": {
+        "/messages/process": {
             "put": {
                 "description": "Trigger the processing of messages",
                 "tags": [
@@ -35,7 +35,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/messages/send": {
+        "/messages/send": {
             "post": {
                 "description": "Send a message to the service",
                 "consumes": [

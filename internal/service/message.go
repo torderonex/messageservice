@@ -41,6 +41,7 @@ func (m *MessageService) SendMessage(ctx context.Context, content string) (int, 
 	return messageID, nil
 }
 
+// TODO: fix infinite waiting for a message if query is empty
 // ProcessMessages reads messages from the broker, processes them, and marks them as processed
 func (m *MessageService) ProcessMessages(ctx context.Context) error {
 	slog.Info("Starting to process messages from broker")

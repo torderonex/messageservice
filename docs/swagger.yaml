@@ -19,7 +19,7 @@ definitions:
 info:
   contact: {}
 paths:
-  /api/v1/messages/process:
+  /messages/process:
     put:
       description: Trigger the processing of messages
       responses:
@@ -32,7 +32,7 @@ paths:
       summary: Process messages
       tags:
       - messages
-  /api/v1/messages/send:
+  /messages/send:
     post:
       consumes:
       - application/json
