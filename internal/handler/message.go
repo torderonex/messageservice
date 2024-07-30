@@ -13,6 +13,17 @@ type sendMessageRes struct {
 	ID int `json:"id"`
 }
 
+// sendMessage handles the sending of a message.
+// @Summary Send a message
+// @Description Send a message to the service
+// @Tags messages
+// @Accept json
+// @Produce json
+// @Param message body sendMessageReq true "Message Content"
+// @Success 200 {object} sendMessageRes
+// @Failure 400 {object} errorResponse "Invalid request payload"
+// @Failure 500 {object} errorResponse "Internal server error"
+// @Router /messages [post]
 func (h *Handler) sendMessage(c *gin.Context) {
 	var req sendMessageReq
 	if err := c.BindJSON(&req); err != nil {
@@ -28,6 +39,13 @@ func (h *Handler) sendMessage(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
+// processMessages handles the processing of messages.
+// @Summary Process messages
+// @Description Trigger the processing of messages
+// @Tags messages
+// @Success 200 "Successfully processed messages"
+// @Failure 500 {object} errorResponse "Internal server error"
+// @Router /messages/process [post]
 func (h *Handler) processMessages(c *gin.Context) {
 	err := h.service.Message.ProcessMessages(c)
 	if err != nil {
